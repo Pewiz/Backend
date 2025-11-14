@@ -50,9 +50,9 @@ app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     description="Backend API Template con FastAPI, JWT, PostgreSQL y más",
-    docs_url=f"{settings.API_PREFIX}/docs",
-    redoc_url=f"{settings.API_PREFIX}/redoc",
-    openapi_url=f"{settings.API_PREFIX}/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json",
     lifespan=lifespan
 )
 
@@ -72,7 +72,7 @@ async def root():
     return {
         "message": f"Bienvenido a {settings.APP_NAME}",
         "version": settings.APP_VERSION,
-        "docs": f"{settings.API_PREFIX}/docs",
+        "docs": "/docs",
         "status": "running"
     }
 
