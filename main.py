@@ -30,12 +30,15 @@ async def lifespan(app: FastAPI):
     logger.info(f"📝 Entorno: {settings.ENVIRONMENT}")
     logger.info(f"🔐 DEBUG: {settings.DEBUG}")
     
-    # Inicializar base de datos
-    try:
-        await init_db()
-        logger.info("✅ Base de datos inicializada")
-    except Exception as e:
-        logger.error(f"❌ Error al inicializar base de datos: {e}")
+    # Inicializar base de datos (si está configurada)
+    if settings.DATABASE_URL:
+        try:
+            await init_db()
+            logger.info("✅ Base de datos inicializada")
+        except Exception as e:
+            logger.error(f"❌ Error al inicializar base de datos: {e}")
+    else:
+        logger.warning("⚠️  Base de datos no configurada - Define DATABASE_URL en .env")
     
     yield
     
